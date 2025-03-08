@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Investment Calculator - Daily Growth Tracker</title>
+    <meta name="description" content="Track daily NFT investment growth with compound interest calculations and stacking zones">
+    <meta name="keywords" content="NFT calculator, crypto tracker, daily earnings, investment growth">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2B6CB0;
+            --primary-green: #38A169;
+            --gradient: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+        }
+
+        body {
+            background: var(--gradient);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .input-group {
+            margin: 25px 0;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        button {
+            background: linear-gradient(90deg, #2B6CB0, #38A169);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .adsense-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .results-table th, .results-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dual-earning {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .page-info {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .glass-container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .results-table td {
+                padding: 10px;
+            }
+        }
+		
+	
+        /* Add these new styles */
+        .faq-section {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .faq-item {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .separator {
+            border: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="home.html">🏠 Home</a></li>
+            <li><a href="blog.html">📚 Blog</a></li>
+            <li><a href="calculator.html">🧮 Calculator</a></li>
+			<li><a href="faq.html">❓ FAQ</a></li>
+            
+        </ul>
+    </nav>
+
+    <div class="glass-container">
+        <h1>💰 NFT Investment Calculator</h1>
+        
+        <div class="input-group">
+            <label>🏦 Initial Investment:</label>
+            <select id="investment">
+                <option value="0">🚫 No Investment</option>
+                <option value="100">💵 $100</option>
+                <option value="150">💵 $150</option>
+                <option value="200">💵 $200</option>
+                <option value="300">💵 $300</option>
+                <option value="500">💵 $500</option>
+                <option value="800">💵 $800</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <button onclick="calculateGrowth()">🚀 Calculate Growth</button>
+            
+            <!-- Adsense Ad Space -->
+            <div class="adsense-container">
+                <!-- Replace with your Adsense code -->
+                <div style="padding:20px; background:rgba(255,255,255,0.1); border-radius:10px;">
+                    📢 Ad Space (728x90)
+                </div>
+            </div>
+            
+            <button onclick="resetCalculator()" style="background: #4a5568">🔄 Reset</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+	
+	<!-- Previous body content remains same until results div -->
+
+    <div class="glass-container">
+        <!-- Calculator content remains same -->
+
+        <hr class="separator">
+
+        <!-- FAQ Section -->
+        <div class="faq-section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h3>💡 How does the dual earning work?</h3>
+                <p>On the final day of any stacking period, your funds earn both the stacking rate and the reservation system rate simultaneously for compound growth.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>⏳ What happens after stacking period ends?</h3>
+                <p>Funds automatically return to the reservation system and qualify for higher stacking zones when balance thresholds are met.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>💸 Can I withdraw promotional balance?</h3>
+                <p>The $150 promotional credit expires after 3 days if no additional investment is made. Maintain your investment to keep the bonus.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>🔄 How often can I stack?</h3>
+                <p>You can enter stacking zones whenever your balance meets the threshold. Each stacking cycle lasts 3 days with automatic renewal options.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="about.html">📘 About Us</a>
+            <a href="privacy.html">🔒 Privacy Policy</a>
+            <a href="terms.html">📝 Terms of Use</a>
+            <a href="contact.html">📧 Contact</a>
+        </div>
+        <p>© 2023 NFT Growth Calculator. All rights reserved.<br>
+        🚀 Empowering Smart Crypto Investments</p>
+    </footer>
+
+    <!-- Previous script content remains same -->
+
+    <script>
+        let currentPage = 1;
+        let allDays = [];
+        const itemsPerPage = 30;
+
+        function calculateGrowth() {
+            const investment = parseInt(document.getElementById('investment').value);
+            let balance = investment + 150;
+            let currentZone = 'reservation';
+            let daysInZone = 0;
+            allDays = [];
+            
+            for(let day = 1; day <= 180; day++) {
+                if(day === 4) balance = Math.max(balance - 150, 0);
+                
+                // Zone transition logic
+                const newZone = checkZoneTransition(balance);
+                if(newZone !== currentZone && day > 3) {
+                    currentZone = newZone;
+                    daysInZone = 0;
+                }
+
+                let rate = getDailyRate(currentZone);
+                let isDual = false;
+                
+                // Handle stacking days
+                if(currentZone !== 'reservation' && day > 3) {
+                    daysInZone++;
+                    
+                    if(daysInZone === 3) {
+                        // Compound interest on final stacking day
+                        const reservationRate = 0.018;
+                        balance *= (1 + rate) * (1 + reservationRate);
+                        isDual = true;
+                        daysInZone = 0;
+                        currentZone = 'reservation';
+                    } else {
+                        balance *= (1 + rate);
+                    }
+                } else {
+                    // Reservation system days
+                    balance *= (1 + rate);
+                }
+
+                allDays.push({
+                    day,
+                    balance: balance.toFixed(2),
+                    zone: currentZone,
+                    rate: (rate * 100).toFixed(1) + '%',
+                    isDual
+                });
+            }
+            showResults();
+        }
+
+        function checkZoneTransition(balance) {
+            if(balance >= 800) return 'zone3';
+            if(balance >= 500) return 'zone2';
+            if(balance >= 200) return 'zone1';
+            return 'reservation';
+        }
+
+        function getDailyRate(zone) {
+            return {
+                reservation: 0.018,
+                zone1: 0.012,
+                zone2: 0.015,
+                zone3: 0.017
+            }[zone];
+        }
+
+        function showResults() {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const currentDays = allDays.slice(start, end);
+            
+            let html = `
+                <div class="page-info">📅 Showing Days ${start + 1}-${end}</div>
+                <table class="results-table">
+                    <tr>
+                        <th>📆 Day</th>
+                        <th>💰 Balance</th>
+                        <th>⚡ Daily Rate</th>
+                        <th>🏷️ Status</th>
+                    </tr>`;
+
+            currentDays.forEach(day => {
+                html += `
+                    <tr class="${day.isDual ? 'dual-earning' : ''}">
+                        <td>${day.day}</td>
+                        <td>$${day.balance}</td>
+                        <td>${day.rate}</td>
+                        <td>${getStatusLabel(day)}</td>
+                    </tr>`;
+            });
+
+            html += `</table>
+                <div class="pagination">
+                    <button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>⏪ Previous</button>
+                    <button onclick="changePage(1)" ${currentPage === 6 ? 'disabled' : ''}>Next ⏩</button>
+                </div>`;
+
+            document.getElementById('results').innerHTML = html;
+        }
+
+        function getStatusLabel(day) {
+            const zoneLabels = {
+                reservation: '📊 Reservation System',
+                zone1: '🆓 Free Zone 1',
+                zone2: '🆓 Free Zone 2',
+                zone3: '🆓 Free Zone 3'
+            };
+            
+            if(day.isDual) return '💰 Dual Earnings (Stacking + Reservation)';
+            return zoneLabels[day.zone];
+        }
+
+        function changePage(delta) {
+            currentPage += delta;
+            showResults();
+        }
+
+        function resetCalculator() {
+            document.getElementById('investment').value = '0';
+            document.getElementById('results').innerHTML = '';
+            currentPage = 1;
+            allDays = [];
+        }
+    </script>
+</body>
+</html>
