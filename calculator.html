@@ -193,6 +193,45 @@
             background: rgba(255, 255, 255, 0.2);
             margin: 40px 0;
         }
+
+	        .refer-box {
+            background: #f0f9ff;
+            border: 2px solid #7dd3fc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .emoji {
+            font-size: 2em;
+        }
+
+        .refer-text {
+            font-size: 1.2em;
+            color: #075985;
+        }
+
+        .refer-code {
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #e11d48;
+            border: 2px dashed #fda4af;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .refer-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }    
     </style>
 </head>
 <body>
@@ -235,6 +274,16 @@
             
             <button onclick="resetCalculator()" style="background: #4a5568">🔄 Reset</button>
         </div>
+
+	    <div class="refer-box">
+        <div class="emoji">💰🎉</div>
+        <div class="refer-text">
+            Enter my refer code: 
+            <span class="refer-code">U5WFQ0XW</span> 
+            while signing up to claim your 
+            <span style="color: #16a34a; font-weight: bold;">$150 bonus credit!</span>
+        </div>
+    </div>
 
         <div id="results"></div>
     </div>
